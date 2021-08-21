@@ -1,3 +1,4 @@
+from users.models import BinanceUser
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -16,4 +17,22 @@ class Coin(models.Model):
         ordering = ('-price',)
 
     def __str__(self):
-        return self.title
+        return self.name
+
+class Portfolio(models.Model):
+
+    class PorfolioObjects(models.Manager):
+        def get_queryset(self):
+            return super().get_queryset() 
+
+    coinId = models.ForeignKey(Coin, on_delete=models.PROTECT, default=1)
+    userId = models.ForeignKey(BinanceUser, on_delete=models.PROTECT, default=1)
+    amount = models.FloatField(max_length=20)
+    usdValue = models.FloatField(max_length=20)
+    objects = models.Manager()  # default manager
+    portfolioobjects = PorfolioObjects()  # custom manager
+
+    class Meta:
+        
+        def __str__(self):
+            return self.id

@@ -1,15 +1,22 @@
 from rest_framework import generics
-from dashboard.models import Coin
-from .serializers import CoinSerializer
+from dashboard.models import Coin, Portfolio
+from .serializers import CoinSerializer, PortfolioSerializer
 
 class CoinList(generics.ListCreateAPIView):
     queryset = Coin.coinobjects.all()
     serializer_class = CoinSerializer
 
-
 class CoinDetail(generics.RetrieveDestroyAPIView):
     queryset = Coin.objects.all()
     serializer_class = CoinSerializer
+
+class PortfolioList(generics.ListCreateAPIView):
+    queryset = Portfolio.portfolioobjects.all()
+    serializer_class = PortfolioSerializer
+
+class PortfolioDetail(generics.RetrieveDestroyAPIView):
+    queryset = Portfolio.objects.all()
+    serializer_class = PortfolioSerializer
 
 """ Concrete View Classes
 #CreateAPIView
