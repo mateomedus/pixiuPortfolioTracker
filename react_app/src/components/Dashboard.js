@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
 const Dashboard = (props) => {
 	const { dashboard } = props;
 	const classes = useStyles();
-	if (!dashboard || dashboard.length === 0) return <p>Can not find any posts, sorry</p>;
+	if (!dashboard || dashboard.length === 0) return <p>Can not find any coins, sorry</p>;
 	return (
 		<React.Fragment>
 			<Container maxWidth="md" component="main">

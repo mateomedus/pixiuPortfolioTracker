@@ -1,35 +1,43 @@
-import React from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import { makeStyles } from '@material-ui/core/styles';
+import React, { useState, useEffect, Fragment } from 'react';
+import { Link } from 'react-router-dom';
 
-const useStyles = makeStyles((theme) => ({
-	appBar: {
-		borderBottom: `1px solid ${theme.palette.divider}`,
-	},
-}));
+const Navbar = () => {
+  const [isAuth, setIsAuth] = useState(false);
 
-function Header() {
-	const classes = useStyles();
-	return (
-		<React.Fragment>
-			<CssBaseline />
-			<AppBar
-				position="static"
-				color="white"
-				elevation={0}
-				className={classes.appBar}
-			>
-				<Toolbar>
-					<Typography variant="h6" color="inherit" noWrap>
-						PixiuTracker
-					</Typography>
-				</Toolbar>
-			</AppBar>
-		</React.Fragment>
-	);
-}
+  useEffect(() => {
+    if (localStorage.getItem('token') !== null) {
+      setIsAuth(true);
+    }
+  }, []);
 
-export default Header;
+  return (
+    <nav>
+      <h1>Pixiu Tracker</h1>
+      <ul>
+        {isAuth === true ? (
+          <Fragment>
+            {' '}
+            <li>
+              <Link to='/'>Dashboard</Link>
+            </li>
+            <li>
+              <Link to='/logout'>Logout</Link>
+            </li>
+          </Fragment>
+        ) : (
+          <Fragment>
+            {' '}
+            <li>
+              <Link to='/login'>Login</Link>
+            </li>
+            <li>
+              <Link to='/signup'>Signup</Link>
+            </li>
+          </Fragment>
+        )}
+      </ul>
+    </nav>
+  );
+};
+
+export default Navbar;
