@@ -21,7 +21,6 @@ function App() {
 	}, [setAppState]);
 	return (
 		<div className="App">
-			<h1> Dashboard </h1>
 			<DashboardLoading isLoading={appState.loading} dashboard={appState.dashboard} />
 		</div>
 	);
