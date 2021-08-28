@@ -1,1 +1,4 @@
 .vscode/settings.json
+dashboard_api/__pycache__/urls.cpython-39.pyc
+core/__pycache__/settings.cpython-39.pyc
+core/__pycache__/wsgi.cpython-39.pyc
