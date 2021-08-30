@@ -5,10 +5,14 @@ from django.contrib.auth.models import User
 class Coin(models.Model):
 
     class CoinObjects(models.Manager):
+        def create_coin(self, name, price):
+            coin = self.create(name=name,price=price)
+            return coin
+
         def get_queryset(self):
             return super().get_queryset() 
 
-    name = models.CharField(max_length=250)
+    name = models.CharField(max_length=250, primary_key=True)
     price = models.CharField(max_length=250) 
     objects = models.Manager()  # default manager
     coinobjects = CoinObjects()  # custom manager
@@ -18,6 +22,7 @@ class Coin(models.Model):
 
     def __str__(self):
         return self.name
+        
 
 class Portfolio(models.Model):
 
@@ -25,7 +30,7 @@ class Portfolio(models.Model):
         def get_queryset(self):
             return super().get_queryset() 
 
-    coinId = models.ForeignKey(Coin, on_delete=models.PROTECT, default=1)
+    coinName = models.ForeignKey(Coin, on_delete=models.PROTECT, default=1)
     userId = models.ForeignKey(BinanceUser, on_delete=models.PROTECT, default=1)
     amount = models.FloatField(max_length=20)
     usdValue = models.FloatField(max_length=20)

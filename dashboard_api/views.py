@@ -1,8 +1,21 @@
 from rest_framework import generics
 from dashboard.models import Coin, Portfolio
 from .serializers import CoinSerializer, PortfolioSerializer
+from binance.client import Client
+
 
 class CoinList(generics.ListCreateAPIView):
+    def get(self, request, *args, **kwargs):
+        client = Client("yXHyNKgtDHkVLeZozpd9KNPVTkFL2UEFj1N3sNWmrBywsduM3x921qHgeX4dbXPb", "zUeXapYf6A5dU5HYm4fNKzlw9KDWCuv1g7h66BxhCjiHiHrYSNC7LtbCpUipMVm2")
+        tickers = client.get_ticker()
+    
+        for ticker in tickers:
+         if str(ticker['symbol'])[-4:] == 'USDT':
+            obj, created = Coin.objects.update_or_create(name = ticker['symbol'].replace('USDT', ''),
+            defaults={'price':ticker['lastPrice']},)
+        
+        return super().get(request, *args, **kwargs)
+    
     queryset = Coin.coinobjects.all()
     serializer_class = CoinSerializer
 
