@@ -1,6 +1,7 @@
 from users.models import BinanceUser
 from django.db import models
 from django.contrib.auth.models import User
+from mirage import fields
 
 class Coin(models.Model):
 
@@ -39,5 +40,27 @@ class Portfolio(models.Model):
 
     class Meta:
         
+        def __str__(self):
+            return self.id
+
+    
+class BinanceCredentials(models.Model):
+
+    class BinanceObjects(models.Manager):
+        def get_queryset(self):
+            return super().get_queryset() 
+
+   
+    userId = models.ForeignKey(BinanceUser, on_delete=models.PROTECT, default="")
+    api_key =  models.CharField(max_length=250, default="")  
+    api_secret = fields.EncryptedCharField()
+    objects = models.Manager()  # default manager
+    binanceobjects = BinanceObjects()
+
+    class BinanceObjects(models.Manager):
+        def get_queryset(self):
+            return super().get_queryset() 
+
+    class Meta:        
         def __str__(self):
             return self.id

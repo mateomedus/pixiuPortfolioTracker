@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -20,8 +20,12 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
+const isLoggedIn = localStorage.getItem('token') === null;
+
+
 function Header() {
 	const classes = useStyles();
+	//isLoggedIn = localStorage.getItem('token') === null;
 	return (
 		<React.Fragment>
 			<CssBaseline />
@@ -47,7 +51,7 @@ function Header() {
 							PixiuTracker
 						</Link>
 					</Typography>
-					<nav>
+					{!isLoggedIn && <nav>
 						<Link
 							color="textPrimary"
 							href="#"
@@ -57,7 +61,7 @@ function Header() {
 						>
 							Register
 						</Link>
-					</nav>
+					</nav>}
 					<Button
 						href="#"
 						color="primary"

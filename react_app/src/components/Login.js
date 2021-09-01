@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,  useEffect } from 'react';
 import axiosInstance from '../axios';
 import { useHistory } from 'react-router-dom';
 //MaterialUI
@@ -35,6 +35,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignIn() {
+
+	useEffect(() => {
+		if (localStorage.getItem('token') !== null) {
+		  window.location.replace('http://localhost:3000/dashboard');
+		} 
+	  }, []);
+
 	const history = useHistory();
 	const initialFormData = Object.freeze({
 		email: '',

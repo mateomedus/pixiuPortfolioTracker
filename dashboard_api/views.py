@@ -1,6 +1,7 @@
+from requests.models import Request
 from rest_framework import generics
-from dashboard.models import Coin, Portfolio
-from .serializers import CoinSerializer, PortfolioSerializer
+from dashboard.models import Coin, Portfolio, BinanceCredentials
+from .serializers import CoinSerializer, PortfolioSerializer, BinanceCredentialsSerializer
 from binance.client import Client
 
 
@@ -30,6 +31,16 @@ class PortfolioList(generics.ListCreateAPIView):
 class PortfolioDetail(generics.RetrieveDestroyAPIView):
     queryset = Portfolio.objects.all()
     serializer_class = PortfolioSerializer
+
+class BinanceCredentialsView(generics.CreateAPIView):
+    def post(self, request, *args, **kwargs):
+        BinanceCredentials.objects.create(userId=request.User.id, api_key=Request.data.api_key, api_secret=Request.data.api_secret)        
+        return super().get(request, *args, **kwargs)
+    
+    queryset = Portfolio.objects.all()
+    serializer_class = BinanceCredentialsSerializer
+
+
 
 """ Concrete View Classes
 #CreateAPIView
