@@ -1,43 +1,87 @@
-import React, { useState, useEffect, Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { makeStyles } from '@material-ui/core/styles';
+import { NavLink } from 'react-router-dom';
+import Link from '@material-ui/core/Link';
+import Button from '@material-ui/core/Button';
 
-const Navbar = () => {
-  const [isAuth, setIsAuth] = useState(false);
+const useStyles = makeStyles((theme) => ({
+	appBar: {
+		borderBottom: `1px solid ${theme.palette.divider}`,
+	},
+	link: {
+		margin: theme.spacing(1, 1.5),
+	},
+	toolbarTitle: {
+		flexGrow: 1,
+	},
+}));
 
-  useEffect(() => {
-    if (localStorage.getItem('token') !== null) {
-      setIsAuth(true);
-    }
-  }, []);
+function Header() {
+	const classes = useStyles();
+	return (
+		<React.Fragment>
+			<CssBaseline />
+			<AppBar
+				position="static"
+				color="default"
+				elevation={0}
+				className={classes.appBar}
+			>
+				<Toolbar className={classes.toolbar}>
+					<Typography
+						variant="h6"
+						color="inherit"
+						noWrap
+						className={classes.toolbarTitle}
+					>
+						<Link
+							component={NavLink}
+							to="/dashboard"
+							underline="none"
+							color="textPrimary"
+						>
+							PixiuTracker
+						</Link>
+					</Typography>
+					<nav>
+						<Link
+							color="textPrimary"
+							href="#"
+							className={classes.link}
+							component={NavLink}
+							to="/register"
+						>
+							Register
+						</Link>
+					</nav>
+					<Button
+						href="#"
+						color="primary"
+						variant="outlined"
+						className={classes.link}
+						component={NavLink}
+						to="/login"
+					>
+						Login
+					</Button>
+					<Button
+						href="#"
+						color="primary"
+						variant="outlined"
+						className={classes.link}
+						component={NavLink}
+						to="/logout"
+					>
+						Logout
+					</Button>
+				</Toolbar>
+			</AppBar>
+		</React.Fragment>
+	);
+}
 
-  return (
-    <nav>
-      <h1>Pixiu Tracker</h1>
-      <ul>
-        {isAuth === true ? (
-          <Fragment>
-            {' '}
-            <li>
-              <Link to='/dashboard'>Dashboard</Link>
-            </li>
-            <li>
-              <Link to='/logout'>Logout</Link>
-            </li>
-          </Fragment>
-        ) : (
-          <Fragment>
-            {' '}
-            <li>
-              <Link to='/login'>Login</Link>
-            </li>
-            <li>
-              <Link to='/signup'>Signup</Link>
-            </li>
-          </Fragment>
-        )}
-      </ul>
-    </nav>
-  );
-};
-
-export default Navbar;
+export default Header;

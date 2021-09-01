@@ -30,7 +30,7 @@ class Portfolio(models.Model):
         def get_queryset(self):
             return super().get_queryset() 
 
-    coinName = models.ForeignKey(Coin, on_delete=models.PROTECT, default=1)
+    coinName = models.ForeignKey(Coin, on_delete=models.PROTECT)
     userId = models.ForeignKey(BinanceUser, on_delete=models.PROTECT, default=1)
     amount = models.FloatField(max_length=20)
     usdValue = models.FloatField(max_length=20)
