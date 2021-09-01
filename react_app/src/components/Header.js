@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const isLoggedIn = localStorage.getItem('token') === null;
+const isLoggedIn = localStorage.getItem('token') !== null;
 
 
 function Header() {
@@ -51,7 +51,7 @@ function Header() {
 							PixiuTracker
 						</Link>
 					</Typography>
-					{!isLoggedIn && <nav>
+					{<nav>
 						<Link
 							color="textPrimary"
 							href="#"
@@ -59,7 +59,7 @@ function Header() {
 							component={NavLink}
 							to="/register"
 						>
-							Register
+							Sign Up
 						</Link>
 					</nav>}
 					<Button
@@ -70,7 +70,7 @@ function Header() {
 						component={NavLink}
 						to="/login"
 					>
-						Login
+					Login
 					</Button>
 					<Button
 						href="#"

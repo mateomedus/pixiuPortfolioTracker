@@ -29,8 +29,8 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+      <Link color="inherit" href="http://localhost:3000/">
+        PixiuTracker
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -70,7 +70,6 @@ const useStyles = makeStyles((theme) => ({
     }),
   },
   menuButton: {
-    marginRight: 36,
   },
   menuButtonHidden: {
     display: 'none',
@@ -147,16 +146,13 @@ export default function Dashboard() {
         open={open}
       >        
         <div className={classes.toolbarIcon}>
-          <IconButton onClick={handleDrawerClose}>
-            <ChevronLeftIcon />
-          </IconButton>
-        </div>
-        <Divider />
-        <List>{mainListItems}</List>
-        <Divider />
-        <List>{secondaryListItems}</List>
-      </Drawer>
-      <IconButton
+        <IconButton 
+          onClick={handleDrawerClose}
+          className={clsx(!open && classes.menuButtonHidden)}
+        >
+          <ChevronLeftIcon />
+        </IconButton>
+        <IconButton
             edge="start"
             color="inherit"
             aria-label="open drawer"
@@ -164,7 +160,14 @@ export default function Dashboard() {
             className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
           >
             <MenuIcon />
-          </IconButton>
+        </IconButton>  
+        </div>
+        <Divider />
+        <List>{mainListItems}</List>
+        <Divider />
+        <List>{secondaryListItems}</List>
+      </Drawer>
+      
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
