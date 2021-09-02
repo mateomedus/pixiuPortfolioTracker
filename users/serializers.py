@@ -1,7 +1,7 @@
 from rest_framework.serializers import ModelSerializer
-from .models import BinanceUser
+from .models import BinanceUser  
+
 class UserSerializer(ModelSerializer):
     class Meta:
         model = BinanceUser
-        fields = ('email', 'last_login', 'date_joined', 'is_staff')
-        
+        fields = ('email', 'last_login', 'date_joined', 'is_staff', 'api_secret', 'api_key' )

@@ -39,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignUp() {
+	const [password, setpassword] = useState("")
 	useEffect(() => {
 		if (localStorage.getItem('token') !== null) {
 		  window.location.replace('http://localhost:3000/dashboard');
@@ -69,7 +70,7 @@ export default function SignUp() {
 		axiosInstance
 			.post('v1/users/auth/register/', {
 				email: formData.email,
-				password1: formData.password,
+				password1: password,
 				password2: formData.password,
 			})
 			.then((res) => {
@@ -127,7 +128,7 @@ export default function SignUp() {
 								type="password"
 								id="password"
 								autoComplete="current-password"
-								onChange={handleChange}
+								onChange={(e) => setpassword(e)}
 							/>
 						</Grid>
 						<Grid item xs={12}>

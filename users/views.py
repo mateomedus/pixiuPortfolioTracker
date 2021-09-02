@@ -1,5 +1,5 @@
 from users.serializers import UserSerializer
-from users.models import BinanceUser
+from users.models import  BinanceUser
 from django.shortcuts import render
 from rest_framework import generics
 
@@ -13,3 +13,4 @@ class BinanceUserUpdate(generics.ListCreateAPIView):
         user = BinanceUser.objects.filter()
         return super().get(request, *args, **kwargs)
     """
+
