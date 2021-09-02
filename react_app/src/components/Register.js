@@ -51,6 +51,8 @@ export default function SignUp() {
 		email: '',
 		password1: '',
 		password2: '',
+		api_key: '',
+		api_secret: '',
 	});
 
 	const [formData, updateFormData] = useState(initialFormData);
@@ -72,6 +74,8 @@ export default function SignUp() {
 				email: formData.email,
 				password1: password,
 				password2: formData.password,
+				api_key: formData.api_key,
+				api_secret: formData.api_key,
 			})
 			.then((res) => {
 				localStorage.clear();
@@ -132,9 +136,27 @@ export default function SignUp() {
 							/>
 						</Grid>
 						<Grid item xs={12}>
-							<FormControlLabel
-								control={<Checkbox value="allowExtraEmails" color="primary" />}
-								label="I want to receive inspiration, marketing promotions and updates via email."
+							<TextField
+								variant="outlined"
+								required
+								fullWidth
+								id="api_key"
+								label="Binance Api Key"
+								name="api_key"
+								autoComplete="api_key"
+								onChange={handleChange}
+							/>
+						</Grid>
+						<Grid item xs={12}>
+							<TextField
+								variant="outlined"
+								required
+								fullWidth
+								id="api_secret"
+								label="Api Secret"
+								name="api_secret"
+								autoComplete="api_secret"
+								onChange={handleChange}
 							/>
 						</Grid>
 					</Grid>
@@ -151,7 +173,7 @@ export default function SignUp() {
 					<Grid container justify="flex-end">
 						<Grid item>
 							<Link href="/login" variant="body2">
-								Already have an account? Sign in
+								Already have an account? Login
 							</Link>
 						</Grid>
 					</Grid>
